@@ -1,7 +1,7 @@
 package com.abhi.FileScheduler.service;
 
-import com.abhi.FileScheduler.externalsvc.Fileconfigsvc.FileConfigService;
-import com.abhi.FileScheduler.externalsvc.Fileconfigsvc.FileDTO;
+import com.abhi.FileScheduler.externalsvc.fileconfigsvc.FileConfigService;
+import com.abhi.FileScheduler.externalsvc.fileconfigsvc.FileDTO;
 import com.abhi.FileScheduler.repo.FileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -25,8 +25,7 @@ public class FileSchedulerServiceImpl {
         for (FileDTO fileDTO : fileDTOS) {
             if (fileDTO.getSchedule().equals("HOURLY")) {
                 int hour = fileDTO.getDaily().getHour();
-                LocalDate date = fileDTO.getDaily().getCreateDate();
-                 filedaily = fileRepository.findByDaily(date);
+                 filedaily = fileRepository.findByDaily(LocalDate.ofEpochDay(hour));
                 generatefileHourly();
 
 

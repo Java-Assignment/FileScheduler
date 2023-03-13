@@ -1,4 +1,4 @@
-package com.abhi.FileScheduler.externalsvc.Fileconfigsvc.vo;
+package com.abhi.FileScheduler.externalsvc.fileconfigsvc.vo;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
