@@ -1,17 +1,45 @@
 package com.abhi.FileScheduler.service;
 
-import com.abhi.FileScheduler.externalsvc.FileConfigService;
-import com.abhi.FileScheduler.externalsvc.dto.FileDTO;
+import com.abhi.FileScheduler.externalsvc.Fileconfigsvc.FileConfigService;
+import com.abhi.FileScheduler.externalsvc.Fileconfigsvc.FileDTO;
+import com.abhi.FileScheduler.repo.FileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+
+import java.time.LocalDate;
+import java.util.List;
 
 public class FileSchedulerServiceImpl {
     @Autowired
     FileConfigService fileConfigService;
+    @Autowired
+    FileRepository fileRepository;
 
-     private String date_string = "2023-03-09";
+    private FileDTO filedaily;
 
-    public void fetchFromfileConfig(){
 
-        FileDTO fileDTO=fileConfigService.getAccountByDate(date_string);
+    @Scheduled(cron = "0 * * * * *")
+    public void fetchFromfileConfig() {
+
+        List<FileDTO> fileDTOS = fileConfigService.getAllAccounts();
+        for (FileDTO fileDTO : fileDTOS) {
+            if (fileDTO.getSchedule().equals("HOURLY")) {
+                int hour = fileDTO.getDaily().getHour();
+                LocalDate date = fileDTO.getDaily().getCreateDate();
+                 filedaily = fileRepository.findByDaily(date);
+                generatefileHourly();
+
+
+            }
+        }
+
+
+    }
+
+    @Scheduled(fixedRate = 60 * 60 * 1000)
+    public void generatefileHourly() {
+        String filename = filedaily.getFileName();
+
+
     }
 }
