@@ -1,4 +1,4 @@
-package com.abhi.FileScheduler.externalsvc.fileconfigsvc.vo;
+package com.abhi.FileScheduler.vo;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +9,9 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 public class Weekly {
-    private int week;
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
-    private LocalDate createDate;
+    private int DayOfWeek;
+    private int minutes;
+
+    private int hour;
 }
+

@@ -1,4 +1,4 @@
-package com.abhi.FileScheduler.externalsvc.fileconfigsvc.vo;
+package com.abhi.FileScheduler.vo;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,11 +9,8 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 public class Daily {
-    private String day;
+    private int day;
     private int minutes;
-    private int seconds;
     private int hour;
-    @DateTimeFormat()
-    private LocalDate createDate;
 
 }
