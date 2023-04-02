@@ -1,5 +1,6 @@
-package com.abhi.FileScheduler.externalsvc;
+package com.abhi.filescheduler.externalsvc;
 
+import com.abhi.filescheduler.dto.FileDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -21,22 +22,22 @@ public class FineNameGenerator {
         uri= UriComponentsBuilder.fromHttpUrl("http://localhost:9009/file").build().toUri();
     }
 
-    public String sendFileName(String name) throws JsonProcessingException {
+    public FileDTO sendFile(FileDTO fileDTO) throws JsonProcessingException {
         WebClient webClient = webClientBuilder.build();
-        Mono<String> mono =webClient.post()
-                .bodyValue(new ObjectMapper().writeValueAsString(name))
+        Mono<FileDTO> mono =webClient.post()
+                .bodyValue(new ObjectMapper().writeValueAsString(fileDTO))
                 .exchangeToMono(
                         response -> {
                             if (response.statusCode().is2xxSuccessful()) {
-                                return response.bodyToMono(String.class);
+                                return response.bodyToMono(FileDTO.class);
                             } else {
                                 return response.createException().flatMap(Mono::error);
                             }
                         }
                 );
 
-        String filename = mono.block();
-        log.info("AccountSvcWebClient. NEW AC :" + filename);
-        return filename;
+        FileDTO fileDTO1 = mono.block();
+        log.info("the full file details are :" + fileDTO1);
+        return fileDTO1;
     }
     }

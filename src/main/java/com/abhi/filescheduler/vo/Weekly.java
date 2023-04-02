@@ -1,10 +1,7 @@
-package com.abhi.FileScheduler.vo;
+package com.abhi.filescheduler.vo;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor

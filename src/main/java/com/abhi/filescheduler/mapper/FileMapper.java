@@ -1,7 +1,7 @@
-package com.abhi.FileScheduler.mapper;
+package com.abhi.filescheduler.mapper;
 
-import com.abhi.FileScheduler.dto.FileDTO;
-import com.abhi.FileScheduler.entity.FileConfig;
+import com.abhi.filescheduler.dto.FileDTO;
+import com.abhi.filescheduler.entity.FileConfig;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

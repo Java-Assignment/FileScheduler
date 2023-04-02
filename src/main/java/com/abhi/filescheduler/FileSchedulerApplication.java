@@ -1,4 +1,4 @@
-package com.abhi.FileScheduler;
+package com.abhi.filescheduler;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.abhi.FileScheduler;
+package com.abhi.filescheduler;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

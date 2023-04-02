@@ -1,6 +1,6 @@
-package com.abhi.FileScheduler.repo;
+package com.abhi.filescheduler.repo;
 
-import com.abhi.FileScheduler.entity.FileConfig;
+import com.abhi.filescheduler.entity.FileConfig;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 
