@@ -35,14 +35,14 @@ public class FileSchedulerServiceImpl {
     public void FileScheduler() throws FileNotFoundException, JsonProcessingException {
         List<FileConfig> fileDTOS=fileRepository.findAll();
         for (FileConfig fileConfig : fileDTOS) {
-            if (Objects.nonNull(fileConfig.isHourly())) {
+            if (Objects.nonNull(fileConfig.getIsHourly())) {
                 generatefileHourly(fileConfig);
 
-            } else if (Objects.nonNull(fileConfig.isMonthly())) {
+            } else if (Objects.nonNull(fileConfig.getIsMonthly())) {
                 generatefileMonthly(fileConfig);
-            } else if (Objects.nonNull(fileConfig.isWeekly())) {
+            } else if (Objects.nonNull(fileConfig.getIsWeekly())) {
                 generatefileWeekly(fileConfig);
-            } else if (Objects.nonNull(fileConfig.isDaily())) {
+            } else if (Objects.nonNull(fileConfig.getIsDaily())) {
                 generatefileDaily(fileConfig);
             } else {
                 throw new FileNotFoundException("Invalid file and was not found");

@@ -10,6 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FileDTO {
     private String fileName;
+    private Boolean isHourly;
+    private Boolean isMonthly;
+    private Boolean isWeekly;
+    private  Boolean isDaily;
     private Monthly monthly;
     private Weekly weekly;
     private Daily daily;
