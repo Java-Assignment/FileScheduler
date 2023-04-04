@@ -16,7 +16,7 @@ import java.net.URI;
 public class FineNameGenerator {
     @Autowired
     private WebClient.Builder webClientBuilder;
-
+/* This code is used to send  File info to file generator so that  we save all the accounts details from Accountgenerator into file name send by the scheduler to the file generator */
     private URI uri;
     public FineNameGenerator() {
         uri= UriComponentsBuilder.fromHttpUrl("http://localhost:9009/file").build().toUri();

@@ -31,7 +31,7 @@ public class FileSchedulerServiceImpl {
     private FileConfig fileConfig;
 
 
-    @Scheduled(cron = "0 */1 * * * *")
+    @Scheduled(cron = "0 */1 * * * *")/* This is used to generate files every one minute*/
     public void FileScheduler() throws FileNotFoundException, JsonProcessingException {
         List<FileConfig> fileDTOS=fileRepository.findAll();
         for (FileConfig fileConfig : fileDTOS) {
