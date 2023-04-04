@@ -15,17 +15,17 @@ import java.net.URI;
 
 @Component
 @Slf4j
-public class FineNameGenerator {
+public class FileGenerator {
     @Autowired
     private WebClient.Builder webClientBuilder;
 
     /* This code is used to send  File info to file generator so that
-    we save all the accounts details from Accountgenerator into file name
+    we save all the accounts details from Account-generator into file name
     send by the scheduler to the file generator */
 
     private URI uri;
 
-    public FineNameGenerator() {
+    public FileGenerator() {
         uri = UriComponentsBuilder.fromHttpUrl("http://localhost:9009/files").build().toUri();
     }
 

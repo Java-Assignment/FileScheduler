@@ -5,12 +5,16 @@ import com.abhi.filescheduler.vo.Daily;
 import com.abhi.filescheduler.vo.Hourly;
 import com.abhi.filescheduler.vo.Monthly;
 import com.abhi.filescheduler.vo.Weekly;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "FileConfigure")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class FileConfig {
     @Id
     private String fileName;
