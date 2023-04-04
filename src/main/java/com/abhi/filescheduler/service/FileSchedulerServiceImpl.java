@@ -31,86 +31,80 @@ public class FileSchedulerServiceImpl {
     private FileConfig fileConfig;
 
 
-    @Scheduled(cron = "0 */1 * * * *")/* This is used to generate files every one minute*/
+    @Scheduled(cron = "0 */1 * * * *")/* This is used to create  files every one minute*/
     public void FileScheduler() throws FileNotFoundException, JsonProcessingException {
         List<FileConfig> fileDTOS=fileRepository.findAll();
+        log.info(String.valueOf(fileDTOS.size()));
+        log.info("before for loop");
         for (FileConfig fileConfig : fileDTOS) {
-            if (Objects.nonNull(fileConfig.getIsHourly())) {
+            log.info("inside for loop");
+//            log.info(String.valueOf(!fileConfig.getIsHourly()));
+            if (Objects.nonNull(fileConfig.getDaily().getHour()))
+                log.info("hourly ");{
                 generatefileHourly(fileConfig);
-
-            } else if (Objects.nonNull(fileConfig.getIsMonthly())) {
+            }
+            if (Objects.nonNull(fileConfig.getMonthly())) {
+                log.info("monthly ");
                 generatefileMonthly(fileConfig);
-            } else if (Objects.nonNull(fileConfig.getIsWeekly())) {
+            }
+            if (Objects.nonNull(fileConfig.getWeekly())) {
+                log.info("weekly");
                 generatefileWeekly(fileConfig);
-            } else if (Objects.nonNull(fileConfig.getIsDaily())) {
+            }
+            if (Objects.nonNull(fileConfig.getDaily())) {
+                log.info("daily");
                 generatefileDaily(fileConfig);
-            } else {
-                throw new FileNotFoundException("Invalid file and was not found");
             }
         }
     }
 
 
     private void generatefileDaily(FileConfig fileConfig) throws JsonProcessingException {
-        LocalDateTime lastDateTime=null;
-        while (true){
-            LocalDateTime localDateTime=LocalDateTime.now();
-            if(localDateTime==null || !localDateTime.equals(lastDateTime)){
+        log.info("daily");
+        LocalDateTime localDateTime=LocalDateTime.now();
+        log.info(String.valueOf(localDateTime));
                 if(localDateTime.getHour()==fileConfig.getDaily().getHour() && localDateTime.getMinute()==fileConfig.getDaily().getMinutes()){
                     filename = fileConfig.getFileName();
-                    fineNameGenerator.sendFile(fileDTO);
                     log.info(filename);
+                    FileDTO fileDTO1=filemapper.convertFileConfTOFileDTO(fileConfig);
+                    fineNameGenerator.sendFile(fileDTO1);
                 }
-            }
-            lastDateTime=localDateTime;
-        }
+
     }
 
     private void generatefileWeekly(FileConfig fileConfig) throws JsonProcessingException {
-        LocalDateTime lastDateTime=null;
-        while (true){
-            LocalDateTime localDateTime=LocalDateTime.now();
-            if(lastDateTime==null||!localDateTime.equals(lastDateTime)){
+        log.info("weekly");
+        LocalDateTime localDateTime=LocalDateTime.now();
                 if(localDateTime.getDayOfWeek().getValue() == fileConfig.getWeekly().getDayOfWeek() && localDateTime.getHour() == fileConfig.getWeekly().getHour() && localDateTime.getMinute() ==fileConfig.getWeekly().getMinutes() ){
                     filename = fileConfig.getFileName();
-                    fineNameGenerator.sendFile(fileDTO);
                     log.info(filename);
+                    FileDTO fileDTO1=filemapper.convertFileConfTOFileDTO(fileConfig);
+                    fineNameGenerator.sendFile(fileDTO1);
                 }
-            }
-            lastDateTime=localDateTime;
-        }
-
     }
 
     private void generatefileMonthly(FileConfig fileConfig) throws JsonProcessingException {
-        LocalDateTime lastDateTime=null;
-        while (true){
-            LocalDateTime localDateTime=LocalDateTime.now();
-            if(lastDateTime==null || !localDateTime.equals(lastDateTime)) {
+        log.info("monthly");
+        LocalDateTime localDateTime=LocalDateTime.now();
                 if (localDateTime.getDayOfMonth() == fileConfig.getMonthly().getDayOfMonth() && localDateTime.getHour() == fileConfig.getMonthly().getHour() && localDateTime.getMinute() == fileConfig.getMonthly().getMinutes()) {
                     filename = fileConfig.getFileName();
-                    fineNameGenerator.sendFile(fileDTO);
                     log.info(filename);
+                    FileDTO fileDTO1=filemapper.convertFileConfTOFileDTO(fileConfig);
+                    fineNameGenerator.sendFile(fileDTO1);
                 }
-            }
-            lastDateTime=localDateTime;
-        }
 
     }
 
     public void generatefileHourly(FileConfig fileConfig) throws JsonProcessingException {
-        LocalDateTime lastDateTime=null;
-        while (true){
+        log.info("Hourly");
             LocalDateTime localDateTime=LocalDateTime.now();
-            if(lastDateTime==null || !localDateTime.equals(lastDateTime)) {
                 if ( localDateTime.getHour() == fileConfig.getDaily().getHour()) {
                     filename = fileConfig.getFileName();
-                    fineNameGenerator.sendFile(fileDTO);
                     log.info(filename);
+                    FileDTO fileDTO1=filemapper.convertFileConfTOFileDTO(fileConfig);
+                    fineNameGenerator.sendFile(fileDTO1);
                 }
-            }
-            lastDateTime=localDateTime;
-        }
+
     }
 
 }

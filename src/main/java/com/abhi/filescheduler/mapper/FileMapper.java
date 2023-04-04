@@ -8,4 +8,6 @@ import org.mapstruct.Mapper;
 public interface FileMapper {
 
     FileDTO convertFileConfigToFileDTO(FileConfig a);
+
+    FileDTO convertFileConfTOFileDTO(FileConfig fileConfig);
 }
